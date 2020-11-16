@@ -118,7 +118,6 @@ def play_a_cycle(population):
     system_payoff = sum(payoffs)
     print('system payoff', system_payoff)
     # Only the top half of the population can create offsprings
-    # Only dna with payoff higher than the mean can create offspring
     selected_parents = []
     while len(selected_parents) < size / 2:
         max_payoff = max(payoffs)
