@@ -1,4 +1,4 @@
-# https://www.cs.umd.edu/~golbeck/downloads/JGolbeck_prison.pdf
+# Make sure to read this paper https://www.cs.umd.edu/~golbeck/downloads/JGolbeck_prison.pdf
 
 import random
 
@@ -18,8 +18,8 @@ def tit_for_tat(hist, side):
     else:
         return hist[-2]
 
-# the rest of the implementations
-def payoff(action1, action2):
+# the rest of the implementation
+def get_payoff(action1, action2):
     if action1 and action2:
         return 3, 3
     elif action1 and not action2:
@@ -31,6 +31,7 @@ def payoff(action1, action2):
 
 def get_strategy_str(strat):
     representation = []
+    # True means cooperate, False means defect
     for i in [True, False]:
         for j in [True, False]:
             for k in [True, False]:
@@ -44,7 +45,7 @@ def get_strategy_str(strat):
 def play_a_game(hist, strat1, strat2):
     action1 = strat1(hist, 1)
     action2 = strat2(hist, 2)
-    return payoff(action1, action2)
+    return get_payoff(action1, action2)
 
 def play_a_round(strat1, strat2):
     cum_payoff1, cum_payoff2 = 0, 0
@@ -143,5 +144,8 @@ population = []
 for i in range(20):
     population.append(get_strategy_str(do_random))
 # Iterate over cycles
-for i in range(500):
+for i in range(1000):
     population = play_a_cycle(population)
+
+# for strat_str in population:
+#     print(sum(1 if i else 0 for i in strat_str))
